@@ -1,9 +1,9 @@
-import run from "aocrunner";
+import run from 'aocrunner';
 
-const parseInput = (rawInput: string) => rawInput.split("\n");
+const parseInput = (rawInput: string) => rawInput.split('\n');
 
 const splitCard = (card: string) => {
-  const [winners, numbers] = card.split(":")?.[1].split(" | ");
+  const [winners, numbers] = card.split(':')?.[1].split(' | ');
 
   return {
     winners: winners.match(/\d+/g) || ([] as string[]),

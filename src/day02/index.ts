@@ -1,4 +1,4 @@
-import run from "aocrunner";
+import run from 'aocrunner';
 
 const parseInput = (rawInput: string) => rawInput;
 
@@ -15,7 +15,7 @@ const cubeNames = Object.keys(limits) as CubeName[];
 const getMaxCubeValue = (game: string, cubeName: CubeName, initial = 0) => {
   const values =
     game
-      .match(new RegExp(`[0-9]+(?= ${cubeName})`, "g"))
+      .match(new RegExp(`[0-9]+(?= ${cubeName})`, 'g'))
       ?.map((value) => Number(value)) || [];
 
   return Math.max(...values, initial);
@@ -24,7 +24,7 @@ const getMaxCubeValue = (game: string, cubeName: CubeName, initial = 0) => {
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  return input.split("\n").reduce((total, game) => {
+  return input.split('\n').reduce((total, game) => {
     const isImpossible = cubeNames.some(
       (cube) => getMaxCubeValue(game, cube) > limits[cube],
     );
@@ -42,7 +42,7 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  return input.split("\n").reduce((total, game) => {
+  return input.split('\n').reduce((total, game) => {
     const calc = cubeNames.reduce(
       (total, cube) => total * getMaxCubeValue(game, cube, 1),
       1,

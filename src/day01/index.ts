@@ -1,4 +1,4 @@
-import run from "aocrunner";
+import run from 'aocrunner';
 
 const parseInput = (rawInput: string) => rawInput;
 
@@ -6,8 +6,8 @@ const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
   return input
-    .replace(/[^\d\n]/g, "")
-    .split("\n")
+    .replace(/[^\d\n]/g, '')
+    .split('\n')
     .map((numbers) => {
       const firstNumber = numbers[0];
       const lastNumber = numbers[numbers.length - 1];
@@ -21,21 +21,21 @@ const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
   const numbersData = [
-    "zero",
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
   ];
 
-  const numberRegex = numbersData.join("|");
+  const numberRegex = numbersData.join('|');
 
-  const convertStringToNumber = (value = "") => {
+  const convertStringToNumber = (value = '') => {
     const numberValue = Number(value);
 
     if (!isNaN(numberValue)) {
@@ -48,15 +48,15 @@ const part2 = (rawInput: string) => {
   };
 
   return input
-    .split("\n")
+    .split('\n')
     .map((line) => {
       const regex = `(\\d|${numberRegex})`;
 
-      const [firstOccurrence] = line.match(new RegExp(regex, "g")) || [];
+      const [firstOccurrence] = line.match(new RegExp(regex, 'g')) || [];
 
       const [lastOccurrence] =
         line
-          .match(new RegExp(`${regex}(?!ne|wo|hree|ight|ine)`, "g"))
+          .match(new RegExp(`${regex}(?!ne|wo|hree|ight|ine)`, 'g'))
           ?.reverse() || [];
 
       const firstNumber = convertStringToNumber(firstOccurrence);

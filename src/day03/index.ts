@@ -1,4 +1,4 @@
-import run from "aocrunner";
+import run from 'aocrunner';
 
 const parseInput = (rawInput: string) => rawInput;
 
@@ -8,7 +8,7 @@ const part1 = (rawInput: string) => {
   const rows = input.split(`\n`);
 
   const isSymbol = (char?: string) =>
-    !!char && !char?.replace(/[^\.\d\s]/g, "");
+    !!char && !char?.replace(/[^\.\d\s]/g, '');
 
   const hasSymbolAround = (
     rowIndex: number,
@@ -55,7 +55,7 @@ const part2 = (rawInput: string) => {
 
   const rows = input.split(`\n`);
 
-  const isSymbol = (char?: string) => !!char && !char?.replace(/\*/g, "");
+  const isSymbol = (char?: string) => !!char && !char?.replace(/\*/g, '');
 
   const getSymbolId = (x: number, y: number) =>
     isSymbol(rows[x]?.[y]) ? `${x}${y}` : null;
