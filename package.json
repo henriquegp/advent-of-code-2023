@@ -4,7 +4,7 @@
   "description": "Advent of Code 2023 - solutions",
   "type": "module",
   "scripts": {
-    "start": "aocrunner day",
+    "start": "NODE_OPTIONS=\"--max-old-space-size=4096\" aocrunner day",
     "build": "aocrunner build",
     "format": "prettier -w src",
     "update:readme": "aocrunner update:readme"
