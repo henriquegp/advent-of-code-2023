@@ -4,9 +4,9 @@ type Network = Record<string, string[]>;
 
 interface GetNavigationStepsProps {
   directions: string[];
-  endsInZ?: boolean;
   network: Network;
   start: string;
+  target: string;
 }
 
 const parseInput = (rawInput: string) => rawInput.split(`\n`);
@@ -34,40 +34,37 @@ const getDirectionsAndNetwork = (input: string[]) => {
 
 const getNavigationSteps = ({
   directions,
-  endsInZ = false,
   network,
   start,
+  target,
 }: GetNavigationStepsProps) => {
-  let count = 0;
+  let steps = 0;
   let currentValue = start;
   let currentDirection = 0;
 
   const foundZ = (value: string) =>
-    endsInZ ? value[2] === 'Z' : value === 'ZZZ';
+    (target.length > 1 ? value : value[2]) === target;
 
   while (!foundZ(currentValue)) {
-    count++;
+    steps++;
 
-    const nextDirection = directions[currentDirection] === 'L' ? 0 : 1;
+    const nextDirection = Number(directions[currentDirection] !== 'L');
     currentValue = network[currentValue][nextDirection];
 
-    if (currentDirection >= directions.length - 1) {
-      currentDirection = 0;
-    } else {
-      currentDirection++;
-    }
+    currentDirection =
+      currentDirection < directions.length - 1 ? currentDirection + 1 : 0;
   }
 
-  return count;
+  return steps;
 };
 
-const gcd = (max: number, min: number): number => {
-  let rem = max % min;
+const gcd = (a: number, b: number): number => {
+  let rem = a % b;
 
-  max = min;
-  min = rem;
+  a = b;
+  b = rem;
 
-  return rem === 0 ? max : gcd(max, min);
+  return rem === 0 ? a : gcd(a, b);
 };
 
 const lcm = (a: number, b: number) => (a * b) / gcd(a, b);
@@ -77,7 +74,12 @@ const part1 = (rawInput: string) => {
 
   const { directions, network } = getDirectionsAndNetwork(input);
 
-  return getNavigationSteps({ directions, network, start: 'AAA' });
+  return getNavigationSteps({
+    directions,
+    network,
+    start: 'AAA',
+    target: 'ZZZ',
+  });
 };
 
 const part2 = (rawInput: string) => {
@@ -90,15 +92,15 @@ const part2 = (rawInput: string) => {
     .map((start) =>
       getNavigationSteps({
         directions,
-        endsInZ: true,
         network,
         start,
+        target: 'Z',
       }),
     );
 
-  const [firstValue] = startValues.splice(0, 1);
+  const firstValue = startValues.shift()!;
 
-  return startValues.reduce((total, item) => lcm(total, item), firstValue);
+  return startValues.reduce(lcm, firstValue);
 };
 
 run({
