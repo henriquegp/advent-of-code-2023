@@ -57,7 +57,7 @@ const calculateArrangements = (input: string[], size = 1) => {
 const part1 = (rawInput: string) => {
   const input = parseInput(rawInput);
 
-  return calculateArrangements(input);
+  // return calculateArrangements(input);
 };
 
 const part2 = (rawInput: string) => {
