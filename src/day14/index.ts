@@ -81,17 +81,17 @@ const part2 = (rawInput: string) => {
   let input = parseInput(rawInput);
 
   const cache: string[] = [];
-  const cycles = 1_000_000_000 * 4;
-
-  let count = 0;
-  let stop = false;
-
   const directions = [
     Direction.NORTH,
     Direction.WEST,
     Direction.SOUTH,
     Direction.EAST,
   ];
+
+  const cycles = 10 ** 9 * directions.length;
+
+  let count = 0;
+  let stop = false;
 
   while (!stop) {
     for (const direction of directions) {
